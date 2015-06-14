@@ -62,6 +62,8 @@
             notEmptyOfDBHost: '数据库主机地址不能为空！',
             notEmptyOfDBOwner: '数据库拥有者不能为空！',
             notEmptyOfDBName: '数据库名称不能为空！',
+            notEmptyOfArticleTitle: '文章标题不能为空！',
+            notEmptyOfArticleBody: '文章内容不能为空！',
             notEmptyOfArticleType: '文章类型不能为空！',
             notEmptyOfAlbumName: '相册名称不能为空！',
             notEmptyOfOutLinksTitle: '外链标题不能为空！',
@@ -1605,10 +1607,10 @@
                     else if (wrapper && wrapper.id === 'modifyArticle') {
                         neEditor = edt_editor;
                     }
-                    //检测图片格式
-                    if (!checkItem($tInput, tips.notConformRuleOfImage)) return false;
+                    //检测文章标题
+                    if (!checkItem($tInput, tips.notEmptyOfArticleTitle)) return false;
                     //检测文章内容
-                    if (!checkItem(neEditor.isEmpty(), tips.notEmptyOfPostContent, neEditor)) return false;
+                    if (!checkItem(neEditor.isEmpty(), tips.notEmptyOfArticleBody, neEditor)) return false;
                     //检测文章类型
                     if (!checkItem(arttype.length<=0, tips.notEmptyOfArticleType)) return false;
                     //加载缓冲icon
