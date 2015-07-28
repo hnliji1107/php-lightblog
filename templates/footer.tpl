@@ -37,7 +37,7 @@
 	<div class="footer mainFooter">
 		{if $indexNavBk}
 		<fieldset>
-			<legend><a href="tencent://message/?uin=928990115&Service=0&sigT=c91aed75f6ce89f7fc95efcb07ae5b66d396e37bb891ba96bf7a544943a82b887bf5289cfc75d7b8406d9" title="联系我"></a>友情链接 QQ:928990115</legend>
+			<legend>站外学习资料库</legend>
 			{if $outlinks}
 				{section name=somelink loop=$outlinks}
 					<a href="{$outlinks[somelink].link_href}" title="{$outlinks[somelink].link_title}" target="_blank" class="outLink" data-linkid="{$outlinks[somelink].link_id}"><span class="title">{$outlinks[somelink].link_title}</span>{if $isSuperAccount}<span class="delOutLinks"></span><span class="editOutLinks"></span>{/if}</a>
