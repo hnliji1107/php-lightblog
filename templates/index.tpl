@@ -13,7 +13,8 @@
 					<div class="sub-item">
 						<div class="pic usertip-wrapper">
 							<input type="hidden" value="{$recommendarts[someart].user_name}" class="ta-name" />
-							<a href="perspace.php?user={$recommendarts[someart].user_name}" class="face"><img data-lazyload-src="{$recommendarts[someart].userphoto}" src="images/lazyload.png" alt="{$recommendarts[someart].user_name}" /></a>
+							<a href="perspace.php?user={$recommendarts[someart].user_name}" target="_blank" class="face"><img
+							data-lazyload-src="{$recommendarts[someart].userphoto}" src="images/lazyload.png" alt="{$recommendarts[someart].user_name}" /></a>
 							<a href="perspace.php?user={$recommendarts[someart].user_name}" class="back"><span><i>签名档:</i><br />{if $recommendarts[someart].signature}{$recommendarts[someart].signature}{else}这家伙没有签名档{/if}</span></a>
 						</div>
 						<div class="information">

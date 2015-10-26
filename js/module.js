@@ -8,7 +8,7 @@
 
 ;(function($, win, doc, undefined) {
     //公共声明
-    var 
+    var
         //body对象
         bdy = doc.body,
         //jQuery包装的window
@@ -94,7 +94,7 @@
             //网站登录接口
             loginApply: function() {
                 //检测用户输入
-                var 
+                var
                     $user_name = getObjByName('user_name:self'),
                     $user_password = getObjByName('user_password:self'),
                     $check_code = getObjByName('check_code:self'),
@@ -106,7 +106,7 @@
                 if (!checkItem($user_password, tips.notEmptyOfPassword)) return;
                 //检测验证码
                 if (!checkItem($check_code, tips.notEmptyOfCheckCode)) return;
-                
+
                 var successFn = function(m) {
                     if (m.status === 1) {
                         //记住登录状态
@@ -175,12 +175,12 @@
             //附件删除功能
             attachmentDelete: function(e) {
                 e.preventDefault();
-                var 
+                var
                     $this = $(this),
                     $liparent = $this.closest('ul'),
                     attachment_id = $this.next('input[type=hidden]').val(),
-                    data = getObjByName('replyid:self').length ? 
-                            {separticle: true, attachment_id: attachment_id} : 
+                    data = getObjByName('replyid:self').length ?
+                            {separticle: true, attachment_id: attachment_id} :
                             {percenter: true, attachment_id: attachment_id},
                     addtxt = '<p style="height:auto;">请注意：<br />1.文件大小不能超过8M<br />2.文件名长度尽量不要超过200个字符</p>',
                     successFn = function(m) {
@@ -226,7 +226,7 @@
             //收藏文章功能
             artCollect: function(e) {
                 e.preventDefault();
-                var 
+                var
                     $this = $(this),
                     //文章id
                     artid = getObjByName('artid:next', $this, true),
@@ -272,26 +272,14 @@
 
         //针对页面缓存，js处理登录状态切换
         clearCache: function() {
-            var reloadCount = webUtil.getCookie('reloadCount') || 0;
-            //最多连续刷新3次
-            if (reloadCount < 3) {
-                if (webUtil.getCookie('loginer') !== loginer) {
-                    //如果该方法没有规定参数，或者参数是 false，它就会用 HTTP 头 If-Modified-Since 来检测服务器上的文档是否已改变。
-                    //如果文档已改变，reload() 会再次下载该文档。
-                    //如果文档未改变，则该方法将从缓存中装载文档。这与用户单击浏览器的刷新按钮的效果是完全一样的。
-                    //如果把该方法的参数设置为 true，那么无论文档的最后修改日期是什么，它都会绕过缓存，从服务器上重新下载该文档。
-                    //这与用户在单击浏览器的刷新按钮时按住ctrl健的效果完全一样。
-                    location.reload();
-                    webUtil.setCookie('reloadCount', reloadCount+1);
-                }
-            } else {
-                webUtil.setCookie('loginer', '');
+            if (webUtil.getCookie('loginer') !== loginer) {
+                location.reload();
             }
         },
 
         //图片预加载
         imagePreLoad: function() {
-            var 
+            var
                 originurl = location.origin+'/images/',
                 //预加载图片队列
                 imgArr = [
@@ -305,7 +293,7 @@
                 (new Image).src = imgArr[i];
             }
         },
-        
+
         //图片懒加载
         imageLazyLoad: function() {
             var timeid;
@@ -318,7 +306,7 @@
 
         //返回顶部功能
         go2Top: function() {
-            var 
+            var
                 $oprabar = $bdy.find('.W_gotop'),
                 sctop = $win.scrollTop(),
                 timeid, distance = 200,
@@ -350,14 +338,14 @@
 
         //网站退出登录功能
         siteQuit: function() {
-            var 
+            var
                 $loginbar = $('.loginbar'),
                 $oprator = $('.oprator'),
                 days = 7,
                 //退出网站登录接口
                 quitApply = function(arg) {
                     arg[0].preventDefault();
-                    var 
+                    var
                         callback = arg[1],
                         successFn = function(m) {
                             //清除登陆者的记录
@@ -376,7 +364,7 @@
                             success: successFn,
                             unloading: false
                         };
-                    
+
                     webUtil.ajaxRequest(ajaxObj);
                 },
                 exitMain = function(e) {
@@ -410,12 +398,12 @@
 
         //查看私信功能
         lookLetter: function() {
-            var 
+            var
                 $lksms = $('#lksms'),
                 $layer_message_box = $('.layer_message_box'),
                 openMessage = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         $lksmsh2 = $lksms.find('h2'),
                         len = $layer_message_box.find('li').length,
@@ -445,7 +433,7 @@
                     elemsh($(this).parent(), false);
                 },
                 reply = function() {
-                    var 
+                    var
                         $senddetail = $lksms.find('.senddetail'),
                         $lksending = $lksms.find('.lksending'),
                         $lksmsp = $lksms.find('.tip'),
@@ -504,11 +492,11 @@
 
         //发送私信功能
         sendLetter: function() {
-            var 
+            var
                 $sendsms = $('#sendsms'),
                 $sending = $sendsms.find('.sending'),
                 submitSend = function() {
-                    var 
+                    var
                         $smsdetail = $sendsms.find('.smsdetail'),
                         $sendObject = $smsdetail.find('input.sminput_type'), //发送对象
                         $textObject = $smsdetail.find(' textarea.sminput_type'), //发送内容
@@ -574,7 +562,7 @@
 
         //网站登录功能
         siteLogin: function() {
-            var 
+            var
                 $loginInner = $('.loginInner'),
                 $spaceWrapper = $('.spaceWrapper'),
                 $registInner = $('.registInner'),
@@ -588,7 +576,7 @@
                 },
                 //网站注册接口
                 registApply = function() {
-                    var 
+                    var
                         $registInner = $('.registInner'),
                         $email = getObjByName('email:parent', $registInner),
                         $name = getObjByName('name:parent', $registInner),
@@ -616,7 +604,7 @@
                     }
 
                     //判断用户名是否重复,验证码是否正确
-                    var 
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 //移除异常刷新器
@@ -672,12 +660,12 @@
 
         //用户回复功能
         userReply: function() {
-            var 
+            var
                 $commentlist = $('.commentlist'),
                 $user_text = $('.user_text'),
                 openReply = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         $parentObj = $this.parent().prevAll('.user_text'),
                         $to_reply = $parentObj.find('.to_reply'),
@@ -694,7 +682,7 @@
                     }
                 },
                 submitReply = function() {
-                    var 
+                    var
                         $theArea = $(this).prevAll('textarea'),
                         $nowreplyObj = $theArea.parent().prevAll('.reply_to_user'),
                         replytext = $.trim($theArea.val()),
@@ -705,8 +693,8 @@
                     if (!checkItem(!loginer, tips.needLoginedOfOprate)) return;
                     //检测回复内容
                     if(!checkItem($theArea, tips.notEmptyOfPostContent)) return;
-                    
-                    var 
+
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 //当前回复列表高度
@@ -750,10 +738,10 @@
         init: function() {
             initialize(this);
         },
-        
+
         //加载分类下的更多文章
         rollLoadMoreArts: function() {
-            var 
+            var
                 $classartInner = $('.classartInner'),
                 $artlistWrap = $classartInner.find('ul'),
                 $getMoreLine = $classartInner.find('.getMoreLine'),
@@ -843,13 +831,13 @@
 
         //热门文章/随机文章浮层操作
         artLayer: function() {
-            var 
+            var
                 $wrapper = $('.mainContent'),
                 $hotArts = $wrapper.find('.hotArts'),
                 $hotArt_first = $hotArts.eq(0),
                 $hotArt_second = $hotArts.eq(1),
                 setLayer = function() {
-                    var 
+                    var
                         $this = $(this),
                         sibling_z = $this.siblings('.hotArts').css('z-index');
 
@@ -888,7 +876,7 @@
 
         //网站搜索栏操作
         searchLine: function() {
-            var 
+            var
                 $mainWrapper = $('.mainWrapper'),
                 $range_txt = $mainWrapper.find('.range_txt'),
                 $condition = $mainWrapper.find('.condition'),
@@ -946,7 +934,7 @@
 
         //首页排序方式切换功能
         indexOrder: function() {
-            var 
+            var
                 //显示用户名片timeid
                 cardtime = null,
                 //移入用户名片timeid
@@ -959,7 +947,7 @@
                         throw new Error('arg[0] and arg[1] must object.');
                     }
 
-                    var 
+                    var
                         elem = arg[0],
                         that = arg[1],
                         isappend = arg[2],
@@ -992,7 +980,7 @@
 
                                 rdom += rstr;
                             });
-                            
+
                             if (m.arts.length >= 9) {
                                 rdom += '<p class="gasket"></p><a href="#" class="openmore" type='+type+'>点击展开更多</a>';
                             }
@@ -1013,7 +1001,7 @@
                 },
                 dataToggle = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         i = $this.index(),
                         type = $this.attr('type'),
@@ -1041,7 +1029,7 @@
                 },
                 appendMore = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         type = $this.attr('type'),
                         $the_disbyorder = $(this).parent('.dis_by_order'),
@@ -1060,7 +1048,7 @@
                 },
                 //显示用户名片
                 cardShow = function() {
-                    var 
+                    var
                         user = $(this).children('input.ta-name').val(),
                         userphoto = $(this).find('img').attr('src'),
                         pos = $(this)[0].getBoundingClientRect(),
@@ -1166,13 +1154,13 @@
 
         //网站外链编辑功能
         outLinksEdit: function() {
-            var 
+            var
                 $mainWrapper = $('.mainWrapper'),
                 $fieldset = $mainWrapper.find('.footer fieldset'),
                 $editOutLinksLayer = $('#editOutLinksLayer'),
                 $addOutLinks = $fieldset.find('.addOutLinks'),
                 submit = function(act) {
-                    var 
+                    var
                         linktitle = getObjByName('linktitle:self', $editOutLinksLayer),
                         linkhref = getObjByName('linkhref:self', $editOutLinksLayer),
                         linktitleVal = $.trim(linktitle.val()),
@@ -1231,7 +1219,7 @@
             }).on('click', '.delOutLinks', function(ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
-                var 
+                var
                     $outLink = $(this).closest('.outLink'),
                     linkid = $outLink.data('linkid'),
                     ajaxObj = {
@@ -1253,7 +1241,7 @@
             }).on('click', '.editOutLinks', function(ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
-                var 
+                var
                     $outLink = $(this).closest('.outLink'),
                     linkid = $outLink.data('linkid'),
                     linktitle_origin = $outLink.attr('title'),
@@ -1288,13 +1276,13 @@
 
         //网站安装功能
         siteInstall: function() {
-            var 
+            var
                 $installWrapper = $('.installWrapper'),
                 $tipblock = $installWrapper.find('.tipblock'),
                 $waiting = $tipblock.find('.waiting'),
                 $dising = $tipblock.find('.dising'),
                 installSubmit = function(e) {
-                    var 
+                    var
                         $host = getObjByName('host:parent', $installWrapper),
                         $db_user = getObjByName('db_user:parent', $installWrapper),
                         $db_name = getObjByName('db_name:parent', $installWrapper),
@@ -1355,7 +1343,7 @@
 
         //网站新闻展示功能
         newsShow: function() {
-            var 
+            var
                 $newsInner = $('.newsInner'),
                 $main_title = $newsInner.find('.main_title'),
                 $cllist = $newsInner.find('.classlist'),
@@ -1392,7 +1380,7 @@
                     var $this = $(this);
                     if($this.hasClass('on')) return;
 
-                    var 
+                    var
                         index = $this.index(),
                         bgclass = $this.text(),
                         $itd = $cllist.eq(index).find('td'),
@@ -1436,7 +1424,7 @@
                     var $this = $(this);
                     if($this.hasClass('selected')) return;
 
-                    var 
+                    var
                         //当前小分类名字
                         smcls = $this.text(),
                         //当前大类名字
@@ -1452,7 +1440,7 @@
                         return;
                     }
 
-                    var 
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 //对应区域切换、高亮
@@ -1482,7 +1470,7 @@
 
         //个人中心页面功能
         perCenter: function() {
-            var 
+            var
                 $percenterInner = $('.percenterInner'),
                 $display_information = $('#display_information'),
                 $modify_information = $('#modify_information'),
@@ -1494,7 +1482,7 @@
                     elemsh($modify_information, true);
                 },
                 saveChange = function() {
-                    var 
+                    var
                         $mod_sign = $modify_information.find('.signtext textarea'),
                         $email = getObjByName('mod_email:parent', $modify_information),
                         $qq = getObjByName('mod_qq:parent', $modify_information),
@@ -1527,7 +1515,7 @@
                     //检测资料是否改变
                     if (!checkItem(oldsex===sex&&oldemail===email&&oldqq===qq&&oldphone===phone&&oldsignature===signature, tips.notChangeOfInformation)) return;
 
-                    var 
+                    var
                         successFn = function(m) {
                             //更新资料
                             $oldsex.val(sex);
@@ -1554,7 +1542,7 @@
                     webUtil.ajaxRequest(ajaxObj);
                 },
                 changePassword = function() {
-                    var 
+                    var
                         $modify_password_input = getObjByName('modify_password:self'),
                         $new_password_input = getObjByName('new_password:self');
 
@@ -1563,7 +1551,7 @@
                     //检测新密码
                     if (!checkItem($new_password_input, '新'+tips.notEmptyOfPassword)) return;
 
-                    var 
+                    var
                         successFn = function(m) {
                             webUtil.boxalert({
                                 msg: m.msg,
@@ -1594,7 +1582,7 @@
                     webUtil.loading(true, 1);
                 },
                 changeArts = function(e) {
-                    var 
+                    var
                         wrapper = e.target.parentNode.parentNode.parentNode,
                         $tInput = $(wrapper).find('input.subject'),
                         arttype = $(wrapper).find('input[type=radio]:checked'),
@@ -1620,7 +1608,7 @@
                     e.preventDefault();
                     var $this = $(this);
                     Boxy.confirm({content:'确定要删除文章吗?', buttonText:['确定','取消']}, function() {
-                        var 
+                        var
                             article_id = $this.next('input[type=hidden]').val(),
                             $tbody = $manageblock.find('tbody'),
                             successFn = function(m) {
@@ -1645,7 +1633,7 @@
                     e.preventDefault();
                     var $this = $(this);
                     Boxy.confirm({content:'确定要删除文章收藏吗?', buttonText:['确定','取消']}, function() {
-                        var 
+                        var
                             article_id = $this.next('input[type=hidden]').val(),
                             $tbody = $collectblock.find('tbody'),
                             successFn = function(m) {
@@ -1689,13 +1677,13 @@
 
         //资源页面功能
         resource: function() {
-            var 
+            var
                 $resourceInner = $('.resourceInner'),
                 $dialog = $resourceInner.find('.post_upload_file'),
                 $station = $resourceInner.find('.station'),
                 resourceUpload = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         isopen = $this.data("open"),
                         dialog_h = $dialog.height()+10;
@@ -1723,10 +1711,10 @@
 
         //密码找回功能
         forgetPassword: function() {
-            var 
+            var
                 $retrpwdWrapper = $('.retrpwdWrapper'),
                 changeSubmit = function() {
-                    var 
+                    var
                         $ckcode = getObjByName('checkCode:parent', $retrpwdWrapper),
                         $name = getObjByName('user_name:parent', $retrpwdWrapper),
                         $email = getObjByName('user_email:parent', $retrpwdWrapper),
@@ -1735,7 +1723,7 @@
                         lasttime = webUtil.getCookie('lasttime');
 
                     if (!!lasttime) {
-                        var 
+                        var
                             maxtime = 600000,
                             diff_time = nowtime-lasttime,
                             diff_min = Math.ceil((maxtime-diff_time)/60000);
@@ -1751,8 +1739,8 @@
                     if (!checkItem(!emailReg.test($email.val()), tips.notConformRuleOfEmail, $email)) return;
                     //判断验证码是否填写
                     if (!checkItem($ckcode, tips.notEmptyOfCheckCode)) return;
-                
-                    var 
+
+                    var
                         successFn = function(m) {
                             webUtil.boxalert({
                                 msg: m.msg,
@@ -1792,7 +1780,7 @@
 
         //文章detail页功能
         articleDetail: function() {
-            var 
+            var
                 $separtInner = $('.separtInner'),
                 runCode = function() {
                     var winname = win.open('', '_blank', '');
@@ -1808,7 +1796,7 @@
                 },
                 quote = function(e) {
                     e.stopPropagation();
-                    var 
+                    var
                         $this = $(this),
                         $theli = $this.closest('li'),
                         $quoteTxt = $theli.find('.quote_txt'),
@@ -1866,7 +1854,7 @@
 
         //代码高亮懒加载
         highlighterLazyLoad: function() {
-            var 
+            var
                 timeid, highlighterlink, pre = $('pre.js, pre.css, pre.html, pre.php, pre.xml'),
                 exec = function() {
                     //已加载过资源取消滚动事件绑定
@@ -1905,7 +1893,7 @@
 
         //分享栏懒加载
         sharelineLazyLoad: function() {
-            var 
+            var
                 timeid, sharebar = $('.sharebar'),
                 exec = function() {
                     //已加载过资源取消滚动事件绑定
@@ -1936,7 +1924,7 @@
 
         //编辑器懒加载
         editorLazyLoad: function() {
-            var 
+            var
                 timeid, commentarea = $('.commentarea'),
                 exec = function() {
                     console.log(0)
@@ -1989,10 +1977,10 @@
         init: function() {
             initialize(this);
         },
-        
+
         //我的空间主页功能
         spaceIndex: function() {
-            var 
+            var
                 $perspaceInner = $('.perspaceInner'),
                 $sidebar = $('.sidebar'),
                 $sendsms = $('#sendsms'),
@@ -2007,7 +1995,7 @@
 
         //我的相册页面功能
         spaceAlbum: function() {
-            var 
+            var
                 $albumInner = $('.albumInner'),
                 $disArts_box = $albumInner.find('.disArts_box'),
                 $box_first = $disArts_box.eq(0),
@@ -2036,12 +2024,12 @@
                 submitCreate = function() {
                     //检测相册名称
                     if (!checkItem(getObjByName('album_name:parent', $disArts_box), tips.notEmptyOfAlbumName)) return false;
-                    //加载缓冲icon                      
+                    //加载缓冲icon
                     webUtil.loading(true, 1);
                 },
                 edit = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $setdetails = $(this).closest('.set-details'),
                         //原相册id
                         oldid = $setdetails.find('input.aid').val(),
@@ -2067,7 +2055,7 @@
                     webUtil.undialog($editObj);
                 },
                 submitEdit = function() {
-                    var 
+                    var
                         $newname_input = $editObj.find('input.aname'),
                         //显示原相册名称
                         newname = $newname_input.val(),
@@ -2080,7 +2068,7 @@
 
                     //检测相册名称
                     if (!checkItem($newname_input, tips.notEmptyOfAlbumName)) return;
-                    
+
                     for(var i=0, len=$setdetails.length; i<len; i++) {
                         var $setdetails_i = $setdetails.eq(i);
                         //当前循环相册id
@@ -2099,7 +2087,7 @@
                         }
                     }
 
-                    var 
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 for(var i=0, len=$setdetails.length; i<len; i++) {
@@ -2139,7 +2127,7 @@
                 },
                 deletation = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         $albumInner = $('.albumInner'),
                         $calbum = $albumInner.find('.calbum'),
@@ -2179,7 +2167,7 @@
                 },
                 addPhoto = function() {
                     photoIndex++;
-                    var 
+                    var
                         photo = 'photo_'+photoIndex,
                         newphoto = ['<li>',
                                         '<span>',
@@ -2204,13 +2192,13 @@
                 openSomePhoto = function(e) {
                     e.preventDefault();
                     if (e.target.nodeName.toLowerCase() !== 'img') return;
-                    
-                    var 
+
+                    var
                         $this = $(this),
                         src = $this.attr('origin_path'),
                         title = $this.attr('title'),
                         alt = $this.attr('alt');
-                        
+
                     //加载缓冲icon
                     webUtil.loading(true, 1);
                     //原图请求
@@ -2234,7 +2222,7 @@
                 },
                 photoResize = function() {
                     if($big_ph.is(':hidden')) return;
-                    var 
+                    var
                         distance = 40,
                         minSize = 200,
                         win_height = $win.height() - distance,
@@ -2281,7 +2269,7 @@
                 },
                 managePhoto = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         $checking = $disArts_box.find('.checking'),
                         thisact = $this.text();
@@ -2311,7 +2299,7 @@
                     //如果没选中项
                     if (!checkItem(!$checkboxs.is(':checked'), tips.selectedOfDeletePhoto)) return;
                     //如果有选中
-                    var 
+                    var
                         //已选中照片
                         $checkeds = $album_photosUl.find('input[type=checkbox]:checked'),
                         names = [],
@@ -2322,7 +2310,7 @@
                         names[i] = $checkeds.eq(i).val();
                     }
 
-                    var 
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 location.href = location.href;
@@ -2347,7 +2335,7 @@
                 },
                 setCover = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         //已选中照片
                         $checkeds = $album_photosUl.find('input[type=checkbox]:checked'),
                         aid = $manage.find('input.aid').val();
@@ -2355,8 +2343,8 @@
                     //相册封面选择
                     if (!checkItem($checkeds.length===0, tips.selectedOfAlbumCover)) return;
                     if (!checkItem($checkeds.length>1, tips.selectedOfMoreAsCover)) return;
-                    
-                    var 
+
+                    var
                         successFn = function(m) {
                             webUtil.boxalert({msg: m.msg});
                         },
@@ -2374,7 +2362,7 @@
                     webUtil.ajaxRequest(ajaxObj);
                 },
                 movePhoto = function() {
-                    var 
+                    var
                         $this = $(this),
                         //选择相册id
                         theValue = $this.val(),
@@ -2394,7 +2382,7 @@
                         names[i] = $checkeds.eq(i).val();
                     }
 
-                    var 
+                    var
                         successFn = function(m) {
                             if (m.status === 1) {
                                 location.href = location.href;
@@ -2471,12 +2459,12 @@
 
                         //浏览器是否支持css3 3d效果
                         var divstyle = doc.createElement('div').style;
-                        if (!checkItem(!('-webkit-transform-style' in divstyle || '-moz-transform-style' in divstyle || 
-                            '-o-transform-style' in divstyle || '-ms-transform-style' in divstyle || 
+                        if (!checkItem(!('-webkit-transform-style' in divstyle || '-moz-transform-style' in divstyle ||
+                            '-o-transform-style' in divstyle || '-ms-transform-style' in divstyle ||
                             'transform-style' in divstyle), tips.notSupport3d)) return;
 
                         //添加3d效果
-                        var 
+                        var
                             liLen = $lis.length,
                             degStep = 360/liLen,
                             //25是为了拉开元素间的距离，为了美观
@@ -2518,7 +2506,7 @@
                         });
                     }
                 };
-                
+
 
             //新建相册
             $disArts_box.on('click','.createNew', openCreate)
@@ -2568,7 +2556,7 @@
 
         //我的留言页面功能
         spaceBook: function() {
-            var 
+            var
                 $guestbookInner = $('.guestbookInner'),
                 sbumitBefore = function() {
                     var $commentobj = $guestbookInner.find('.gbcomment_text');
@@ -2585,7 +2573,7 @@
 
         //我的粉丝页面功能
         spaceFans: function() {
-            var 
+            var
                 $fansbody = $('.fansbody'),
                 $sendsms = $('#sendsms'),
                 hoverFirst = function() {
@@ -2596,7 +2584,7 @@
                 },
                 fanMove = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $this = $(this),
                         $li = $this.closest('li'),
                         act = $('input.remove_act').val(),
@@ -2605,7 +2593,7 @@
                         fanAttener = $li.find('.fans_info h4').text();
 
                     Boxy.confirm({content:'确定'+tip+'吗?', buttonText:['确定','取消']}, function() {
-                        var 
+                        var
                             successFn = function(m) {
                                 if (m.status === 1) {
                                     location.href = location.href;
@@ -2631,7 +2619,7 @@
                 //我的空间粉丝搜索功能
                 getFans = function(arg) {
                     if (!arg[0]) return;
-                    var 
+                    var
                         $conditionInput = arg[0],
                         successFn = function(m) {
                             if (m.status === 1) {
@@ -2671,7 +2659,7 @@
                 },
                 fanSearch = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $fansNameInput = $(this).prevAll('input.sminput_type'),
                         fansName = $fansNameInput.val(),
                         find_act = $('input.find_act').val();
@@ -2684,7 +2672,7 @@
                 },
                 fanFind = function(e) {
                     e.preventDefault();
-                    var 
+                    var
                         $fdconditionInput = $(this).prevAll('input.sminput_type'),
                         fdcondition = $fdconditionInput.val();
 
@@ -2715,7 +2703,7 @@
             .on('click', '.sendmessage', {elem: $sendsms}, business.openMessageBox);
         }
     }).init();
-    
+
     //区块init方法
     function initialize(obj) {
         for (var i in obj) {
@@ -2747,7 +2735,7 @@
 
     //根据name查找元素
     function getObjByName(text, obj, isval) {
-        var 
+        var
             match = text.split(':'),
             elem = null, name = match[0], type = match[1], flag = match[2],
             selector = 'input[name='+name+']';
@@ -2779,7 +2767,7 @@
                 elem = obj.prevAll(selector);
             }
             break;
-            default: 
+            default:
             break;
         }
         //返回查找结果
@@ -2826,7 +2814,7 @@
             }
             //把单个中文处理成两个字符(因为这里是把每个汉字看成一个字符的)并求出字数
             else {
-                var 
+                var
                     charNum = string.replace(/[^\x00-\xff]/g, "**").length,
                     difNum = totalNum - charNum;
 
